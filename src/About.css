@@ -1,0 +1,94 @@
+.major-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.about-container {
+  padding: 2rem;
+  width: 50rem;
+  margin: 5rem 0;
+  background-color: #0f0f0f;
+  color: #f1f1f1;
+  font-family: 'Segoe UI', sans-serif;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.151);
+  line-height: 1.8;
+}
+
+.about-title {
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 0.3rem;
+  color: #ff4757;
+}
+
+.about-tagline {
+  text-align: center;
+  /* color: #ccc; */
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.highlight {
+  color: #1e90ff;
+}
+
+.section-title {
+  color: #ffa502;
+  margin-top: 2rem;
+  font-size: 1.6rem;
+  border-bottom: 1px solid #333;
+  padding-bottom: 5px;
+}
+
+.about-paragraph {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.about-list {
+  list-style-type: circle;
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+/* Developer team section */
+.dev-team {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: ;
+  
+}
+
+.dev-card {
+  flex: 1 1 300px;
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  margin: 0.7rem;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.dev-card h5 {
+  margin-top: 0;
+  color: #1e90ff;
+}
+
+.dev-card p {
+  margin: 0.3rem 0;
+  font-size: 0.85rem;
+}
+
+.about-footer {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 0.95rem;
+  color: #888;
+  border-top: 1px solid #333;
+  padding-top: 1rem;
+}

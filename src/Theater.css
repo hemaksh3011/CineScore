@@ -1,0 +1,83 @@
+.wrapper {
+  padding: 3rem 2rem;
+  min-height: 100vh;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(16px);
+}
+
+.location-selector {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 700px;
+  margin: auto;
+  box-shadow: 0 0 30px rgba(0, 255, 200, 0.15);
+}
+
+.location-selector h3 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #00ffc8;
+  border-left: 5px solid #00ffc8;
+  padding-left: 12px;
+}
+
+.location-selector select {
+  display: block;
+  width: 100%;
+  padding: 12px 18px;
+  margin-bottom: 1rem;
+  background: rgba(0, 0, 0, 0.6);
+  color: #00ffc8;
+  border: 1px solid #00ffc8;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.location-selector select:hover,
+.location-selector select:focus {
+  background-color: rgba(0, 0, 0, 0.8);
+  outline: none;
+  box-shadow: 0 0 12px #00ffc8;
+}
+
+.theater-list {
+  margin-top: 2rem;
+}
+
+.theater-list h4 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #00ffc8;
+  border-left: 4px solid #00ffc8;
+  padding-left: 10px;
+}
+
+.theater-list ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.theater-list li {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 10px 16px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  font-size: 1rem;
+  color: #fff;
+  border-left: 4px solid #00ffc8;
+  transition: background 0.3s ease;
+}
+
+.theater-list li:hover {
+  background-color: rgba(0, 255, 200, 0.15);
+}
+
+.bookmyshow{
+  cursor: pointer;
+}

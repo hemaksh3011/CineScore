@@ -1,0 +1,87 @@
+/* TvShows.css */
+
+.tv-container {
+    padding: 2rem;
+    color: #fff;
+    background-color: rgba(10, 10, 10, 0.637);
+    backdrop-filter: blur(12px);
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    color: #00ffc8;
+    border-left: 4px solid #00ffc8;
+    padding-left: 10px;
+  }
+  
+  .search-section {
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .search-section input {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #222;
+    color: white;
+    font-size: 1rem;
+  }
+  
+  .search-section button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    background-color: #00ffc8;
+    color: #000;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .search-section button:hover {
+    background-color: #00c7a1;
+  }
+  
+  .tv-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+  
+  
+  .tv-card {
+    min-width: 180px;
+    background: #181818;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    flex-shrink: 0;
+  }
+  
+  .tv-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 255, 200, 0.3);
+  }
+  
+  .tv-poster {
+    width: 100%;
+    height: 270px;
+    object-fit: cover;
+    border-bottom: 2px solid #ff0000;
+  }
+  
+  .tv-card h4 {
+    font-size: 1rem;
+    padding: 0.6rem 0.8rem;
+    color: #fff;
+    text-align: center;
+  }
+  

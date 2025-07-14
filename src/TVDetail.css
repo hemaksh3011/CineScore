@@ -1,0 +1,39 @@
+.tv-detail-container {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+    color: white;
+    backdrop-filter: blur(10px);
+    background-color: rgba(20, 20, 20, 0.6);
+    border-radius: 16px;
+    margin: 2rem;
+  }
+  
+  .poster-section img {
+    width: 300px;
+    border-radius: 12px;
+    border: 2px solid #00ffc8;
+  }
+  
+  .info-section {
+    flex: 1;
+  }
+  
+  .info-section h2 {
+    font-size: 2.5rem;
+    color: #00ffc8;
+  }
+  
+  .info-section p {
+    margin: 0.8rem 0;
+    font-size: 1rem;
+  }
+  
+  ul {
+    padding-left: 1.2rem;
+  }
+  
+  .trailer-section {
+    margin-top: 2rem;
+  }
+  
