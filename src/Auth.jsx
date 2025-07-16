@@ -1,12 +1,13 @@
 // Auth.js
 import React, { useState } from 'react';
 import { supabase } from './supabaseClient';
+import './Auth.css';
 
 function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const signUp = async () => {
+  const signUp = async () => {+2
     const { error } = await supabase.auth.signUp({ email, password });
     if (error) alert(error.message);
     else alert("Check your email for verification link");
