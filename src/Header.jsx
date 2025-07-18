@@ -32,7 +32,6 @@ function Header({ user }) {
         <Link to="/about" className="nav-item">About</Link>
         <Link to="/Contactus" className="nav-item">Contact</Link>
         {user && <Link to="/watchlist" className="nav-item">Watchlist</Link>}
-      </nav>
 
       <div className="auth-section">
         {user ? (
@@ -44,6 +43,8 @@ function Header({ user }) {
           <Link to="/auth" className="auth-btn">Login</Link>
         )}
       </div>
+      </nav>
+
     </header>
   );
 }

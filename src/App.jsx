@@ -49,7 +49,7 @@ function App() {
             <Route path="/Theater" element={<Theater />} />
             <Route path="/Contactus" element={<Contactus />} />
             <Route path="/About" element={<About />} />
-            <Route path="/auth" element={<AuthPage />} />
+            <Route path="/Auth" element={<AuthPage />} />
 
             {/* 🔒 Protected Watchlist Route */}
             {/* <Route
