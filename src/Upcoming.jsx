@@ -5,6 +5,31 @@ import { fetchUpcomingMovies } from './tmdb';
 import MovieModal from './MovieModal';
 import './Upcoming.css';
 
+
+
+const Spinner = () => (
+  <div style={{ fontSize: '24px', textAlign: 'center' }}>🔄 Loading...</div>
+);
+
+
+export  function MyComponent() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading (2 second ke liye loading dikhayega)
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
+  return (
+    <div>
+      {loading ? <Spinner /> : <p>Yeh tera content hai ✨</p>}
+    </div>
+  );
+}
+
+
 function Upcoming() {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);

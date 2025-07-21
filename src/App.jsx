@@ -13,7 +13,7 @@ import Theater from './Theater';
 import MovieDetail from './MovieDetail';
 import TVShows from './TVShows';
 import AuthPage from './AuthPage';
-// import Watchlist from './Watchlist';
+import Watchlist from './Watchlist';
 
 import './App.css';
 import bg from './images/Moody4_bg.jpg';
@@ -50,6 +50,8 @@ function App() {
             <Route path="/Contactus" element={<Contactus />} />
             <Route path="/About" element={<About />} />
             <Route path="/Auth" element={<AuthPage />} />
+            <Route path="/watchlist" element={<Watchlist />} />
+
 
             {/* 🔒 Protected Watchlist Route */}
             {/* <Route
