@@ -1,22 +1,32 @@
 // Auth.js
 import React, { useState } from 'react';
-import { supabase } from './supabaseClient';
+import { auth } from './firebase';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
+} from "firebase/auth";
 import './Auth.css';
 
 function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const signUp = async () => {+2
-    const { error } = await supabase.auth.signUp({ email, password });
-    if (error) alert(error.message);
-    else alert("Check your email for verification link");
+  const signUp = async () => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      alert("Signup successful!");
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   const login = async () => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) alert(error.message);
-    else alert("Logged in successfully!");
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      alert("Login successful!");
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (

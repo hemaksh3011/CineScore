@@ -12,21 +12,51 @@ function Genre() {
   useEffect(() => {
     const loadGenresAndMovies = async () => {
       const fetchedGenres = await fetchMovieGenres();
-      const filteredGenres = fetchedGenres.filter(g => g.name !== "Romance");
+      const filteredGenres = fetchedGenres.filter(g => g.name !== "Romance" && g.name !== "Drama");
       setGenres([{ id: 'bollywood', name: 'Bollywood' }, ...filteredGenres]);
+
       const genreData = {};
+      const saved = JSON.parse(localStorage.getItem('watchlist')) || [];
 
       const bollywoodMovies = await fetchBollywoodMovies();
-      genreData['Bollywood'] = bollywoodMovies;
+      genreData['Bollywood'] = bollywoodMovies.map(movie => ({
+        ...movie,
+        inWatchlist: saved.some(item => item.id === movie.id),
+      }));
 
       for (const genre of filteredGenres) {
         const movies = await fetchMoviesByGenre(genre.id);
-        genreData[genre.name] = movies;
+        genreData[genre.name] = movies.map(movie => ({
+          ...movie,
+          inWatchlist: saved.some(item => item.id === movie.id),
+        }));
       }
+
       setMoviesByGenre(genreData);
     };
     loadGenresAndMovies();
   }, []);
+
+  const toggleWatchlist = (genreName, movie) => {
+    const saved = JSON.parse(localStorage.getItem('watchlist')) || [];
+    const exists = saved.find(item => item.id === movie.id);
+    let updated;
+
+    if (exists) {
+      updated = saved.filter(item => item.id !== movie.id);
+    } else {
+      updated = [...saved, movie];
+    }
+
+    localStorage.setItem('watchlist', JSON.stringify(updated));
+
+    setMoviesByGenre(prev => ({
+      ...prev,
+      [genreName]: prev[genreName].map(m =>
+        m.id === movie.id ? { ...m, inWatchlist: !exists } : m
+      ),
+    }));
+  };
 
   const handleSearch = (genreName, movies) => {
     const term = searchTerms[genreName]?.toLowerCase() || "";
@@ -72,6 +102,15 @@ function Genre() {
                     alt={movie.title}
                   />
                   <h4>{movie.title}</h4>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleWatchlist(genre.name, movie);
+                    }}
+                    title={movie.inWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}
+                  >
+                    {movie.inWatchlist ? '❌' : '❤️'}
+                  </button>
                 </div>
               ))}
           </div>

@@ -1,3 +1,4 @@
+// TVShows.js
 import React, { useEffect, useState } from 'react';
 import './TVShows.css';
 import { fetchTrendingTvShows, searchTvShows } from './tmdb';
@@ -11,7 +12,14 @@ function TvShows() {
   useEffect(() => {
     const load = async () => {
       const data = await fetchTrendingTvShows();
-      setTvShows(data);
+      const saved = JSON.parse(localStorage.getItem('watchlist')) || [];
+
+      const updated = data.map((tv) => ({
+        ...tv,
+        inWatchlist: saved.some((s) => s.id === tv.id),
+      }));
+
+      setTvShows(updated);
     };
     load();
   }, []);
@@ -19,7 +27,33 @@ function TvShows() {
   const handleSearch = async () => {
     if (query.trim() === "") return;
     const results = await searchTvShows(query);
-    setTvShows(results);
+    const saved = JSON.parse(localStorage.getItem('watchlist')) || [];
+
+    const updated = results.map((tv) => ({
+      ...tv,
+      inWatchlist: saved.some((s) => s.id === tv.id),
+    }));
+
+    setTvShows(updated);
+  };
+
+  const toggleWatchlist = (tv) => {
+    const saved = JSON.parse(localStorage.getItem('watchlist')) || [];
+    const exists = saved.find((item) => item.id === tv.id);
+    let updated;
+
+    if (exists) {
+      updated = saved.filter((item) => item.id !== tv.id);
+    } else {
+      updated = [...saved, tv];
+    }
+
+    localStorage.setItem('watchlist', JSON.stringify(updated));
+    setTvShows((prev) =>
+      prev.map((t) =>
+        t.id === tv.id ? { ...t, inWatchlist: !exists } : t
+      )
+    );
   };
 
   return (
@@ -39,17 +73,17 @@ function TvShows() {
 
       <div className="tv-grid">
         {tvShows.map((tv) => (
-          <div
-            key={tv.id}
-            className="tv-card"
-            onClick={() => navigate(`/tv/${tv.id}`)} // ✅ Navigate on click
-          >
+          <div key={tv.id} className="tv-card">
             <img
               src={`https://image.tmdb.org/t/p/w300${tv.poster_path}`}
               alt={tv.name}
               className="tv-poster"
+              onClick={() => navigate(`/tv/${tv.id}`)}
             />
             <h4>{tv.name}</h4>
+            <button onClick={() => toggleWatchlist(tv)}>
+              {tv.inWatchlist ? '❌' : '❤️'}
+            </button>
           </div>
         ))}
       </div>

@@ -1,73 +1,70 @@
 // Upcoming.js
-
 import React, { useEffect, useState } from 'react';
-import { fetchUpcomingMovies } from './tmdb';
-import MovieModal from './MovieModal';
 import './Upcoming.css';
-
-
-
-const Spinner = () => (
-  <div style={{ fontSize: '24px', textAlign: 'center' }}>🔄 Loading...</div>
-);
-
-
-export  function MyComponent() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Simulate loading (2 second ke liye loading dikhayega)
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, []);
-
-  return (
-    <div>
-      {loading ? <Spinner /> : <p>Yeh tera content hai ✨</p>}
-    </div>
-  );
-}
-
+import { fetchUpcomingMovies } from './tmdb';
+import { useNavigate } from 'react-router-dom';
 
 function Upcoming() {
-  const [movies, setMovies] = useState([]);
-  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [upcoming, setUpcoming] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const load = async () => {
       const data = await fetchUpcomingMovies();
-      setMovies(data);
+      const saved = JSON.parse(localStorage.getItem('watchlist')) || [];
+
+      const updated = data.map((movie) => ({
+        ...movie,
+        inWatchlist: saved.some((item) => item.id === movie.id),
+      }));
+
+      setUpcoming(updated);
     };
     load();
   }, []);
+
+  const toggleWatchlist = (movie) => {
+    const saved = JSON.parse(localStorage.getItem('watchlist')) || [];
+    const exists = saved.find((item) => item.id === movie.id);
+    let updated;
+
+    if (exists) {
+      updated = saved.filter((item) => item.id !== movie.id);
+    } else {
+      updated = [...saved, movie];
+    }
+
+    localStorage.setItem('watchlist', JSON.stringify(updated));
+    setUpcoming((prev) =>
+      prev.map((m) =>
+        m.id === movie.id ? { ...m, inWatchlist: !exists } : m
+      )
+    );
+  };
 
   return (
     <div className="upcoming-container">
       <h2>🎬 Upcoming Movies</h2>
 
       <div className="upcoming-grid">
-        {movies.map((movie) => (
-          <div
-            key={movie.id}
-            className="upcoming-card"
-            onClick={() => setSelectedMovie(movie)}
-          >
+        {upcoming.map((movie) => (
+          <div key={movie.id} className="upcoming-card">
             <img
               src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
               alt={movie.title}
               className="upcoming-poster"
+              onClick={() => navigate(`/movie/${movie.id}`)}
             />
             <h4>{movie.title}</h4>
+            <button onClick={() => toggleWatchlist(movie)} title={movie.inWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}>
+              {movie.inWatchlist ? '❌' : '❤️'}
+            </button>
           </div>
         ))}
       </div>
-
-      {selectedMovie && (
-        <MovieModal movie={selectedMovie} onClose={() => setSelectedMovie(null)} />
-      )}
     </div>
   );
 }
 
 export default Upcoming;
+

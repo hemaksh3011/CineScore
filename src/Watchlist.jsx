@@ -1,36 +1,43 @@
+// Watchlist.js
 import React, { useEffect, useState } from 'react';
+import './Watchlist.css';
+import { useNavigate } from 'react-router-dom';
 
 function Watchlist() {
   const [watchlist, setWatchlist] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Get data from localStorage
-    const stored = localStorage.getItem('watchlist');
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored);
-        setWatchlist(parsed);
-      } catch (e) {
-        console.error("Invalid watchlist format:", e);
-      }
-    }
+    const saved = JSON.parse(localStorage.getItem('watchlist')) || [];
+    setWatchlist(saved);
   }, []);
 
+  const removeFromWatchlist = (id) => {
+    const updated = watchlist.filter((item) => item.id !== id);
+    localStorage.setItem('watchlist', JSON.stringify(updated));
+    setWatchlist(updated);
+  };
+
   return (
-    <div style={{ padding: "2rem" }}>
-      <h2>🎥 Your Watchlist</h2>
+    <div className="watchlist-container">
+      <h2>📌 My Watchlist</h2>
       {watchlist.length === 0 ? (
-        <p style={{ marginTop: "1rem" }}>No movies in your watchlist yet.</p>
+        <p>Your watchlist is empty.</p>
       ) : (
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
-          {watchlist.map((movie) => (
-            <div key={movie.id} style={{ width: "200px" }}>
+        <div className="watchlist-grid">
+          {watchlist.map((item) => (
+            <div key={item.id} className="watchlist-card">
               <img
-                src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-                alt={movie.title}
-                style={{ width: "100%", borderRadius: "8px" }}
+                src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
+                alt={item.title || item.name}
+                onClick={() =>
+                  navigate(item.title ? `/movie/${item.id}` : `/tv/${item.id}`)
+                }
               />
-              <h4>{movie.title}</h4>
+              <h4>{item.title || item.name}</h4>
+              <button onClick={() => removeFromWatchlist(item.id)}>
+                ❌
+              </button>
             </div>
           ))}
         </div>
