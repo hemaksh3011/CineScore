@@ -37,10 +37,11 @@ function App() {
       <BrowserRouter>
         <Header user={user} />
         <img src={bg} alt="" className='bg-image' />
+        <Home/>
 
         <div className="main-content">
           <Routes>
-            <Route path="/Home" element={<Home />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/movie/:id" element={<MovieDetail />} />
             <Route path="/tv/:id" element={<TVDetail />} />
             <Route path="/Genre" element={<Genre />} />

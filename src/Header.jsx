@@ -17,7 +17,7 @@ function Header({ user }) {
   return (
     <header className="main-header">
       <div className="logo-area">
-        <Link to="/">
+        <Link to="/Home">
           <img src={logo} alt="logo" className="logo" />
         </Link>
         <h1 className="site-title">Cine<span>Score</span></h1>

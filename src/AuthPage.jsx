@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { auth } from './firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import './AuthPage.css'
+import './AuthPage.css';
 
 function AuthPage({ onAuthSuccess }) {
   const [email, setEmail] = useState('');
@@ -14,10 +14,10 @@ function AuthPage({ onAuthSuccess }) {
     try {
       if (isLogin) {
         const res = await signInWithEmailAndPassword(auth, email, password);
-        onAuthSuccess(res.user);
+        // onAuthSuccess(res.user);
       } else {
         const res = await createUserWithEmailAndPassword(auth, email, password);
-        onAuthSuccess(res.user);
+        // onAuthSuccess(res.user);
       }
     } catch (err) {
       setError(err.message);
@@ -25,6 +25,7 @@ function AuthPage({ onAuthSuccess }) {
   };
 
   return (
+    <div className="major-container">
     <div className="auth-container">
       <h2>{isLogin ? 'Login' : 'Register'}</h2>
       <input
@@ -46,6 +47,7 @@ function AuthPage({ onAuthSuccess }) {
       <p onClick={() => setIsLogin(!isLogin)} style={{ cursor: 'pointer' }}>
         {isLogin ? 'New here? Register' : 'Already have an account? Login'}
       </p>
+    </div>
     </div>
   );
 }
