@@ -37,7 +37,6 @@ function App() {
       <BrowserRouter>
         <Header user={user} />
         <img src={bg} alt="" className='bg-image' />
-        <Home/>
 
         <div className="main-content">
           <Routes>
@@ -52,6 +51,7 @@ function App() {
             <Route path="/About" element={<About />} />
             <Route path="/Auth" element={<AuthPage />} />
             <Route path="/watchlist" element={<Watchlist />} />
+
 
 
             {/* 🔒 Protected Watchlist Route */}
