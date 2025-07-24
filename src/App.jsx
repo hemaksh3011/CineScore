@@ -1,6 +1,6 @@
 // App.js
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import Home from './Home';
@@ -54,11 +54,7 @@ function App() {
 
 
 
-            {/* 🔒 Protected Watchlist Route */}
-            {/* <Route
-              path="/watchlist"
-              element={user ? <Watchlist user={user} /> : <Navigate to="/auth" />}
-            /> */}
+            
           </Routes>
         </div>
 

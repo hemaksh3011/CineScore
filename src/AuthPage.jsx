@@ -13,10 +13,10 @@ function AuthPage({ onAuthSuccess }) {
   const handleAuth = async () => {
     try {
       if (isLogin) {
-        const res = await signInWithEmailAndPassword(auth, email, password);
+         await signInWithEmailAndPassword(auth, email, password);
         // onAuthSuccess(res.user);
       } else {
-        const res = await createUserWithEmailAndPassword(auth, email, password);
+         await createUserWithEmailAndPassword(auth, email, password);
         // onAuthSuccess(res.user);
       }
     } catch (err) {
